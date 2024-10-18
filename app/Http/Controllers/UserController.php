@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,7 @@ class UserController extends Controller
 
         return response()->json([
             "message" => "show all users",
-            "data" => $large
+            "data" => new UserResource($large)
         ]);
     }
 
@@ -44,7 +45,7 @@ class UserController extends Controller
     {
         return response()->json([
             "message" => "Show User",
-            "data" => $user
+            "data" => new UserResource($user)
         ]);
     }
 

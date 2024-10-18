@@ -11,10 +11,12 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
+        
+        $large=$user->filter(fn ($user) => $user->id > 4); // thats called chaining
 
         return response()->json([
             "message" => "show all users",
-            "data" => $user
+            "data" => $large
         ]);
     }
 
@@ -60,11 +62,11 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json([
+            "message" => "User Deleted successfully"
+        ]);
     }
 }

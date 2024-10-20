@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,14 +22,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $request->validate([
-            "email" => 'required|email',
-            "password" => 'required|string',
-            "name" => 'required|string',
-        ]);
-
         $newUser = User::create([
             'email' => $request->email,
             'name' => $request->name,
